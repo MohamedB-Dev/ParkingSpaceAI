@@ -1,6 +1,5 @@
 console.log('Hello from main.js');
 
-
 function updateParkingStatus(data) {
     try {
         const eventData = JSON.parse(data);
@@ -15,7 +14,7 @@ function updateParkingStatus(data) {
         let rowElement = '';
 
         for (const area of eventData.area_status) {
-            const isOccupied = area.Full;
+            const isOccupied = !area.Full;
             const bgColorClass = isOccupied ? 'danger' : 'success';
 
             const iconElement = isOccupied ? '<i class="bi bi-car-front text-black display-3"></i>' : '';
@@ -31,7 +30,6 @@ function updateParkingStatus(data) {
         console.error('Error parsing JSON data:', error);
     }
 }
-
 
 // Create a new EventSource to receive Server-Sent Events
 const eventSource = new EventSource('/events');
