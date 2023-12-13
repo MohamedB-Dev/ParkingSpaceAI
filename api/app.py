@@ -68,7 +68,6 @@ def get_parking_status(px, polylines, parking_numbers):
 def event_stream():
     with app.app_context():
         while True:
-            time.sleep(1)  # Adjust the sleep time as needed
 
             _, frame = cap.read()
             frame = cv2.resize(frame, (1020, 500))
