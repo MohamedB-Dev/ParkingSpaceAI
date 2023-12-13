@@ -14,7 +14,7 @@ function updateParkingStatus(data) {
         let rowElement = '';
 
         for (const area of eventData.area_status) {
-            const isOccupied = !area.Full;
+            const isOccupied = !area.isOccupied;
             const bgColorClass = isOccupied ? 'danger' : 'success';
 
             const iconElement = isOccupied ? '<i class="bi bi-car-front text-black display-3"></i>' : '';
