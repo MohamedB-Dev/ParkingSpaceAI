@@ -10,22 +10,31 @@ from ultralytics import YOLO
 app = Flask(__name__, template_folder='../front-end/templates', static_folder='../front-end/static')
 CORS(app, resources={r'/events': {'origins': 'http://127.0.0.1:5000'}})
 
-# Initialize data
-with open("pickle", "rb") as f:
-    data = pickle.load(f)
-    polylines, parking_number = data['polylines'], data['parking_number']
+# Define file paths and frame dimensions
+pickle_file = 'parking_data.pkl'
+class_file = 'coco.txt'
+yolo_weights = 'yolov8s.pt'
+video_file = 'video.mp4'
+frame_width = 1020
+frame_height = 500
+frame_process_interval = 3  # Process every third frame
 
-my_file = open("coco.txt", "r")
-data = my_file.read()
-class_list = data.split("\n")
+# Load parking space data
+with open(pickle_file, "rb") as f:
+    data = pickle.load(f)
+    polylines, parking_numbers = data['polylines'], data['parking_numbers']
+
+# Load class labels
+with open(class_file, "r") as file:
+    class_list = file.read().strip().split("\n")
 
 # Initialize YOLO model
-model = YOLO('yolov8s.pt')
+model = YOLO(yolo_weights)
 
-# Initialize VideoCapture
-cap = cv2.VideoCapture('video.mp4')
+# Start video capture
+cap = cv2.VideoCapture(video_file)
 
-def get_parking_status(px, polylines, parking_number):
+def get_parking_status(px, polylines, parking_numbers):
     list1 = []
     list2 = []
     for index, row in px.iterrows():
@@ -51,7 +60,7 @@ def get_parking_status(px, polylines, parking_number):
             if result >= 0:
                 counter1.append(i)  # i is the index of the parking area
 
-    area_status = {parking_number[i]: i not in counter1 for i in list2}
+    area_status = {parking_numbers[i]: i not in counter1 for i in list2}
     total_free_spaces = sum(1 for full in area_status.values() if not full)
 
     return area_status, total_free_spaces
@@ -67,10 +76,10 @@ def event_stream():
             a = results[0].boxes.data
             px = pd.DataFrame(a).astype("float")
 
-            area_status, total_free_spaces = get_parking_status(px, polylines, parking_number)
+            area_status, total_free_spaces = get_parking_status(px, polylines, parking_numbers)
 
             # Convert area_status dictionary to a list of objects
-            area_status_list = [{"AreaNumber": name, "Full": full} for name, full in area_status.items()]
+            area_status_list = [{"Parking spot number": number, "isOccupied": full} for number, full in area_status.items()]
 
             data = {"area_status": area_status_list, "total_free_spaces": total_free_spaces}
             yield f"data: {json.dumps(data)}\n\n"
