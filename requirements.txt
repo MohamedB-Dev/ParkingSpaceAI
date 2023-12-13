@@ -1,0 +1,9 @@
+numpy==1.25.2
+pandas==2.1.0
+opencv-python==4.8.1.78
+flask==3.0.0
+flask-cors==4.0.0
+cvzone==1.6.1
+torch==2.1.1
+torchvision==0.16.1
+yolo==0.3.2
