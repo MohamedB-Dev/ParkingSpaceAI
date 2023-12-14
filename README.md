@@ -20,7 +20,7 @@ Welcome to the ParkingSpaceAI repository! This project is a result of our commit
 
 To get started with ParkingSpaceAI, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/ParkingSpaceAI.git`
+1. Clone the repository: `git clone https://github.com/MohamedB-Dev/ParkingSpaceAI.git`
 2. Install the required dependencies: `pip install -r requirements.txt`
 3. Run the system: `park_config.py`
 4. View the results in `run_video_analysis.py`
