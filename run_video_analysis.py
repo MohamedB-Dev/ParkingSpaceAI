@@ -53,6 +53,14 @@ def process_frame(frame, polylines, parking_numbers):
                 cv2.circle(frame, car, 5, (255, 0, 0), -1)
                 cv2.polylines(frame, [polyline], True, (0, 0, 255), 2)
 
+    detections_person = []
+    for index, row in detections.iterrows():
+        x1, y1, x2, y2, _, class_id = row.astype(int)
+        if class_list[class_id] == 'person':
+            cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+            detections_person.append((cx, cy))
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 2)
+                  
     # Display the frame
     cv2.imshow('Frame', frame)
 
