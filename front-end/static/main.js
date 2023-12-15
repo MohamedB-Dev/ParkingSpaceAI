@@ -4,10 +4,6 @@ function updateParkingStatus(data) {
     try {
         const eventData = JSON.parse(data);
 
-        console.log('Area Status:', eventData.area_status);
-
-        console.log('Total Free Spaces:', eventData.total_free_spaces);
-
         const parkingStatusElement = document.getElementById('parking-status');
         parkingStatusElement.innerHTML = '';
 
