@@ -1,4 +1,4 @@
-console.log('Hello from main.js');
+console.log('JavaScript is loaded!');
 
 function updateParkingStatus(data) {
     try {
