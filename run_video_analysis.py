@@ -59,7 +59,7 @@ def process_frame(frame, polylines, parking_numbers):
         if class_list[class_id] == 'person':
             cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
             detections_person.append((cx, cy))
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 2)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 123, 321), 2)
                   
     # Display the frame
     cv2.imshow('Frame', frame)
