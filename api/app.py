@@ -61,7 +61,7 @@ def get_parking_status(px, polylines, parking_numbers):
                 counter1.append(i)  # i is the index of the parking area
 
     area_status = {parking_numbers[i]: i not in counter1 for i in list2}
-    total_free_spaces = sum(1 for full in area_status.values() if not full)
+    total_free_spaces = sum(1 for occupied in area_status.values() if occupied)
 
     return area_status, total_free_spaces
 
