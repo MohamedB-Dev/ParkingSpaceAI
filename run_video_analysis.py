@@ -13,7 +13,7 @@ yolo_weights = 'yolov8s.pt'
 video_file = 'video.mp4'
 frame_width = 1020
 frame_height = 500
-frame_process_interval = 3  # Process every third frame
+frame_process_interval = 12  # Process every third frame
 
 # Load parking space data
 with open(pickle_file, "rb") as f:

@@ -3,7 +3,7 @@ import numpy as np
 import cvzone
 import pickle
 
-# Configuration variables for ease of modification
+# Configuration variables for ease of modification 
 video_file = 'video.mp4'  # Path to the video file for processing
 pickle_file = 'parking_data.pkl'  # File to store and load parking data
 frame_width = 1020  # Width to resize the video frames

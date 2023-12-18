@@ -10,14 +10,14 @@ from ultralytics import YOLO
 app = Flask(__name__, template_folder='../front-end/templates', static_folder='../front-end/static')
 CORS(app, resources={r'/events': {'origins': 'http://127.0.0.1:5000'}})
 
-# Define file paths and frame dimensions
+# Define file paths and frame dimensions 
 pickle_file = 'parking_data.pkl'
 class_file = 'coco.txt'
 yolo_weights = 'yolov8s.pt'
 video_file = 'video.mp4'
 frame_width = 1020
 frame_height = 500
-frame_process_interval = 3  # Process every third frame
+frame_process_interval = 12  # Process every third frame
 
 # Load parking space data
 with open(pickle_file, "rb") as f:
